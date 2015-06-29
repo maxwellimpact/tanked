@@ -8,38 +8,132 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    var lastTouch = UITouch()
+    var didTouch = false
+    var velocity : Double = 250.0
+    var turnVelocity : Double = 0.12
+    let hotSpotRadius = 5
+    
+    var blueTank = Tank()
+    var tankBarrelJoint = SKPhysicsJoint()
+    
+    var tankLeft = false
+    var tankRight = false
+    var tankUp = false
+    var tankDown = false
+    var tankLeftOn = false
+    var tankRightOn = false
+    
+    var barrelLeft = false
+    var barrelRight = false
+    
+    var fireWeapon = false
+    
+
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+
+        physicsWorld.contactDelegate = self
         
-        self.addChild(myLabel)
+        // assume the tank is always available
+        blueTank.body = childNodeWithName("blueTank")!
+        blueTank.barrel = childNodeWithName("blueTankBarrel")!
+        
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        
+        println( "contact was made" )
+        
+        if contact.bodyA.node?.name == "bullet" {
+            explodeBullet(contact.bodyA.node!)
+        }
+        
+        if contact.bodyB.node?.name == "bullet" {
+            explodeBullet(contact.bodyB.node!)
+        }
+        
+    }
+    
+    func explodeBullet(bullet: SKNode){
+        let smoke = SKSpriteNode(imageNamed: "smokeGrey3")
+        
+        smoke.position = bullet.position
+        
+        self.addChild(smoke)
+        
+        var action = SKAction.fadeAlphaTo(0.0, duration: 0.5)
+        
+        smoke.runAction(action, completion: {
+            self.removeFromParent()
+        })
+        
+        bullet.removeFromParent()
+    }
+    
+    func checkTankShouldMove(){
+        if tankLeft {
+            blueTank.moveLeft()
+            tankLeftOn = true
+        }
+        
+        if tankRight {
+            blueTank.moveRight()
+            tankRightOn = true
+        }
+        
+        if tankUp {
+            blueTank.moveForward()
+        }
+        
+        if tankDown {
+            blueTank.moveBackward()
+        }
+        
+        if !tankLeft && tankLeftOn {
+            blueTank.dampenRotation()
+            tankLeftOn = false
+        }
+        
+        if !tankRight && tankRightOn {
+            blueTank.dampenRotation()
+            tankRightOn = false
+        }
+    }
+    
+    func checkBarrelShouldMove(){
+        if barrelLeft {
+            blueTank.rotateBarrelLeft()
+        }
+        
+        if barrelRight {
+            blueTank.rotateBarrelRight()
+        }
+    }
+    
+    func checkShouldFireWeapon(){
+        if fireWeapon {
+            blueTank.fireMainWeapon()
+            fireWeapon = false
+        }
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
-        for touch in (touches as! Set<UITouch>) {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
+
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        checkTankShouldMove()
+        checkBarrelShouldMove()
+        checkShouldFireWeapon()
+        blueTank.update()
     }
 }

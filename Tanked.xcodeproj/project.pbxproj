@@ -15,6 +15,8 @@
 		34EBF7C61B3D385F00C4EEE8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34EBF7C51B3D385F00C4EEE8 /* Images.xcassets */; };
 		34EBF7C91B3D385F00C4EEE8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34EBF7C71B3D385F00C4EEE8 /* LaunchScreen.xib */; };
 		34EBF7D51B3D385F00C4EEE8 /* TankedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EBF7D41B3D385F00C4EEE8 /* TankedTests.swift */; };
+		34EBF7DF1B3D6D8C00C4EEE8 /* Kenney_topdownTanks in Resources */ = {isa = PBXBuildFile; fileRef = 34EBF7DE1B3D6D8C00C4EEE8 /* Kenney_topdownTanks */; };
+		34F537D21B3FF29B00C406B2 /* Tank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F537D11B3FF29B00C406B2 /* Tank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		34EBF7CE1B3D385F00C4EEE8 /* TankedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TankedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EBF7D31B3D385F00C4EEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34EBF7D41B3D385F00C4EEE8 /* TankedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TankedTests.swift; sourceTree = "<group>"; };
+		34EBF7DE1B3D6D8C00C4EEE8 /* Kenney_topdownTanks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Kenney_topdownTanks; sourceTree = "<group>"; };
+		34F537D11B3FF29B00C406B2 /* Tank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 				34EBF7BA1B3D385F00C4EEE8 /* AppDelegate.swift */,
 				34EBF7BC1B3D385F00C4EEE8 /* GameScene.sks */,
 				34EBF7BE1B3D385F00C4EEE8 /* GameScene.swift */,
+				34F537D11B3FF29B00C406B2 /* Tank.swift */,
 				34EBF7C01B3D385F00C4EEE8 /* GameViewController.swift */,
 				34EBF7C21B3D385F00C4EEE8 /* Main.storyboard */,
 				34EBF7C51B3D385F00C4EEE8 /* Images.xcassets */,
@@ -96,6 +101,7 @@
 		34EBF7B81B3D385F00C4EEE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				34EBF7DE1B3D6D8C00C4EEE8 /* Kenney_topdownTanks */,
 				34EBF7B91B3D385F00C4EEE8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -167,6 +173,7 @@
 				TargetAttributes = {
 					34EBF7B41B3D385F00C4EEE8 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = P6Q9BBLCW5;
 					};
 					34EBF7CD1B3D385F00C4EEE8 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -201,6 +208,7 @@
 				34EBF7C91B3D385F00C4EEE8 /* LaunchScreen.xib in Resources */,
 				34EBF7C61B3D385F00C4EEE8 /* Images.xcassets in Resources */,
 				34EBF7BD1B3D385F00C4EEE8 /* GameScene.sks in Resources */,
+				34EBF7DF1B3D6D8C00C4EEE8 /* Kenney_topdownTanks in Resources */,
 				34EBF7C41B3D385F00C4EEE8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34EBF7BF1B3D385F00C4EEE8 /* GameScene.swift in Sources */,
+				34F537D21B3FF29B00C406B2 /* Tank.swift in Sources */,
 				34EBF7C11B3D385F00C4EEE8 /* GameViewController.swift in Sources */,
 				34EBF7BB1B3D385F00C4EEE8 /* AppDelegate.swift in Sources */,
 			);
@@ -350,9 +359,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tanked/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -360,9 +372,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tanked/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -419,6 +434,7 @@
 				34EBF7DA1B3D385F00C4EEE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34EBF7DB1B3D385F00C4EEE8 /* Build configuration list for PBXNativeTarget "TankedTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +443,7 @@
 				34EBF7DD1B3D385F00C4EEE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

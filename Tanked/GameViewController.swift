@@ -27,12 +27,16 @@ extension SKNode {
 
 class GameViewController: UIViewController {
 
+    
+    var skView = SKView()
+    var gameScene = GameScene()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
-            let skView = self.view as! SKView
+            skView = self.view as! SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
             
@@ -42,10 +46,35 @@ class GameViewController: UIViewController {
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
             
+            gameScene = scene
+            
             skView.presentScene(scene)
         }
     }
-
+    
+    
+    // --- tank controls ---
+    @IBAction func leftTouchDown(sender: UIButton) {gameScene.tankLeft = true}
+    @IBAction func leftTouchUp(sender: UIButton) {gameScene.tankLeft = false}
+    
+    @IBAction func rightTouchDown(sender: UIButton) {gameScene.tankRight = true}
+    @IBAction func rightTouchUp(sender: UIButton) {gameScene.tankRight = false}
+    
+    @IBAction func upTouchDown(sender: UIButton) {gameScene.tankUp = true}
+    @IBAction func upTouchUp(sender: UIButton) {gameScene.tankUp = false}
+    
+    @IBAction func downTouchDown(sender: UIButton) {gameScene.tankDown = true}
+    @IBAction func downTouchUp(sender: UIButton) {gameScene.tankDown = false}
+    
+    @IBAction func barrelLeftDown(sender: UIButton) {gameScene.barrelLeft = true}
+    @IBAction func barrelLeftUp(sender: UIButton) {gameScene.barrelLeft = false}
+    
+    @IBAction func barrelRightDown(sender: UIButton) {gameScene.barrelRight = true}
+    @IBAction func barrelRightUp(sender: UIButton) {gameScene.barrelRight = false}
+    
+    @IBAction func fireDown(sender: UIButton) {gameScene.fireWeapon = true}
+    
+    
     override func shouldAutorotate() -> Bool {
         return true
     }
