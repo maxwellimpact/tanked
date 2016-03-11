@@ -38,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         physicsWorld.contactDelegate = self
         
+        physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        
         // assume the tank is always available
         blueTank.body = childNodeWithName("blueTank")!
         blueTank.barrel = childNodeWithName("blueTankBarrel")!
@@ -46,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         
-        println( "contact was made" )
+        print( "contact was made" )
         
         if contact.bodyA.node?.name == "bullet" {
             explodeBullet(contact.bodyA.node!)
@@ -65,9 +67,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(smoke)
         
-        var action = SKAction.fadeAlphaTo(0.0, duration: 0.5)
+        let fadeAction = SKAction.fadeAlphaTo(0.0, duration: 0.5)
+        let shrinkAction = SKAction.scaleTo(0.3, duration: 0.5)
         
-        smoke.runAction(action, completion: {
+        smoke.runAction(shrinkAction)
+        
+        smoke.runAction(fadeAction, completion: {
             self.removeFromParent()
         })
         
@@ -121,11 +126,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
 
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 
     }
    

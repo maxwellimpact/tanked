@@ -56,7 +56,7 @@ class Tank {
         position.y += sin(barrel.zRotation - CGFloat(M_PI/2) ) * distance
         
         
-        println( barrel.frame.size )
+        print( barrel.frame.size )
         
         // set the placement of the bullet
         bullet.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
