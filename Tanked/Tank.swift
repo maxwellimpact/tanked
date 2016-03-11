@@ -36,7 +36,7 @@ class Tank {
         
         bullet.name = "bullet"
         
-        bullet.physicsBody = SKPhysicsBody(texture: bullet.texture, size: bullet.size)
+        bullet.physicsBody = SKPhysicsBody(texture: bullet.texture!, size: bullet.size)
         bullet.physicsBody?.dynamic = true
         bullet.physicsBody?.mass = 0.01
         bullet.physicsBody?.usesPreciseCollisionDetection = true
